@@ -47,10 +47,15 @@ const mainStore = useMainStore()
 const { entireMenus } = storeToRefs(mainStore)
 const otherInfo = ref({})
 const { contentRef, handleQueryClick, handleResetClick } = usePageContent()
-const { modalRef, handleNewClick, handleEditClick } = usePageModal(editCallback)
+const { modalRef, handleNewClick, handleEditClick } = usePageModal(newCallback, editCallback)
 function handleElTreeCheck(data1: any, data2: any) {
   const menuList = [...data2.checkedKeys, ...data2.halfCheckedKeys]
   otherInfo.value = { menuList }
+}
+function newCallback(){
+  nextTick(()=>{
+    treeRef.value?.setCheckedKeys([])
+  })
 }
 function editCallback(itemData: any) {
   nextTick(() => {

@@ -24,7 +24,7 @@ import type { pushScopeId } from 'vue';
             :size="30"
             src="https://upload.jianshu.io/users/upload_avatars/1102036/c3628b478f06.jpeg"
           />
-          <span class="name">coderwhy</span>
+          <span class="name">{{ loginStore.userInfo.name }}</span>
         </span>
         <template #dropdown>
           <el-dropdown-menu>
@@ -51,11 +51,13 @@ import type { pushScopeId } from 'vue';
 import {useRouter} from 'vue-router'
 import {localCache} from '@/utils/cache'
 import { LOGIN_TOKEN } from '@/global/constants'
+import useLoginStore from '@/store/login/login';
 const router = useRouter()
 function handleExitClick(){
   localCache.deleteCache(LOGIN_TOKEN)
   router.push('/login')
 }
+const loginStore = useLoginStore()
 </script>
 
 <style lang="less" scoped>
